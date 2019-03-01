@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Application Properties" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/application-properties.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="Application Servlet" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/application-servlet.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/application-context.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+</module>

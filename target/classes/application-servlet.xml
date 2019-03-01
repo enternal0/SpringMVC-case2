@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:contex="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--配置视图解析器-->
+   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+       <property name="prefix" value="/WEB-INF/views/"/>
+       <property name="suffix" value=".jsp"/>
+   </bean>
+
+    <!--Spring3.1内置了两个MultipartResolver的实现供我们选择-->
+
+    <!--第一种：CommonsMultipartResolver 他需要依赖第三方库，commons-fileupload-->
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+        <!--<property name="defaultEncoding" value="UTF-8"/>-->
+        <!--<property name="maxUploadSize" value="10485760"/>-->
+        <!--<property name="maxInMemorySize" value="4096"/>-->
+     <!--</bean>-->
+    <!--第二种：StandardServletMultipartResolver，Servlet3对它支持，不需要第三方库
+    使用第二种方式需要在web.xml中的控制器servlet中配置multipart-config-->
+    <bean class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+    <!--开启SpringMVC注解 它会自动注册HandlerMapping,HandlerAdapter,ExceptionResolver的相关实例-->
+    <mvc:annotation-driven/>
+    <!--扫描control包-->
+    <contex:component-scan base-package="com.dan.myspringmvc.control"/>
+
+    <!--1. 处理静态资源第一种方法：采用默认Servlet-->
+    <!--<mvc:default-servlet-handler default-servlet-name="default"/>-->
+    <!--将这个配置好之后，会在Spring MVC容器中定义一个DefaultServletHttpRequestHandler类，它
+    充当一个检查员，对进入DispatcherServlet的URL进行排查，如果发现是静态资源的请求，就将该请求转成
+    web服务器默认的Servlet处理，否则交由DispatcherServlet继续处理-->
+
+    <!--第二种处理静态资源的方法：Spring的Resources-->
+    <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/assets/**" location="/assets" cache-period="1000"/>
+    
+</beans>
